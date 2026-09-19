@@ -62,12 +62,57 @@ class AppUpdater(private val context: Context) {
             .header("Accept", "application/vnd.github+json")
             .header("User-Agent", UA)
             .build()
-        client.newCall(req).execute().use { resp ->
-            when {
-                resp.code == 404 -> null
-                !resp.isSuccessful -> throw IOException("GitHub API HTTP ${resp.code}")
-                else -> AppUpdateChecks.parseRelease(resp.body.string())
+        try {
+            client.newCall(req).execute().use { resp ->
+                when {
+                    resp.code == 404 -> null
+                    resp.code == 403 || resp.code == 429 -> checkLatestViaHtmlRedirect()
+                    !resp.isSuccessful -> throw IOException("GitHub API HTTP ${resp.code}")
+                    else -> AppUpdateChecks.parseRelease(resp.body.string())
+                }
             }
+        } catch (e: Exception) {
+            if (e is IOException && (e.message?.contains("403") == true || e.message?.contains("429") == true)) {
+                checkLatestViaHtmlRedirect()
+            } else {
+                throw e
+            }
+        }
+    }
+
+    /**
+     * 免 API 限流的网页重定向兜底：
+     * 请求 https://github.com/$REPO/releases/latest，从跳转后的重定向 URL 提取最新 tag（如 /tag/v1.0.0）。
+     * 不消耗任何 GitHub API 配额，校园网/共享出口 IP 永不报 403。
+     */
+    private fun checkLatestViaHtmlRedirect(): GitHubRelease? {
+        val htmlReq = Request.Builder()
+            .url("https://github.com/$REPO/releases/latest")
+            .header("User-Agent", UA)
+            .build()
+        // 允许重定向并获取最终 landing URL
+        return client.newCall(htmlReq).execute().use { resp ->
+            if (resp.code == 404) return null
+            val finalUrl = resp.request.url.toString()
+            val tag = finalUrl.substringAfterLast("/tag/").substringAfterLast("/")
+            if (tag.isBlank() || tag == "latest") {
+                throw IOException("无法获取最新发布标签（触发 GitHub API 限流且网页未重定向）")
+            }
+            val apkName = "ZjC-Course-Alert-${tag}-release.apk"
+            val downloadUrl = "https://github.com/$REPO/releases/download/$tag/$apkName"
+            GitHubRelease(
+                tagName = tag,
+                name = "华珠课表 $tag",
+                body = "已检测到新版本 $tag（因 GitHub API 访问频次限制，已通过免限流通道获取）。",
+                htmlUrl = finalUrl,
+                assets = listOf(
+                    GitHubAsset(
+                        name = apkName,
+                        downloadUrl = downloadUrl,
+                        contentType = GitHubAsset.APK_CONTENT_TYPE,
+                    )
+                )
+            )
         }
     }
 

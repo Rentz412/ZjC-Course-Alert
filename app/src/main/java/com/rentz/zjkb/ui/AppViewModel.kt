@@ -34,6 +34,13 @@ class AppViewModel : ViewModel() {
     private val app = ZjkbApp.instance
     private val repo: CourseRepository = app.repo
 
+    private val _userProfile = MutableStateFlow(repo.restoreProfile())
+    val userProfile: StateFlow<com.rentz.zjkb.data.remote.xq.XqModels.UserInfo> = _userProfile
+
+    fun refreshProfile() {
+        _userProfile.value = repo.restoreProfile()
+    }
+
     val settings = app.settings
 
     /** 设置项的可观察快照：SettingsStore 为普通持久化对象，UI 经由 StateFlow 响应变更。 */
@@ -149,6 +156,7 @@ class AppViewModel : ViewModel() {
                 messageOk = if (e == null) null else false,
             )
             if (e == null) {
+                refreshProfile()
                 com.rentz.zjkb.widget.TodayWidgetProvider.refreshAll(app)
                 app.reminderScheduler.rescheduleAsync()
                 onSuccess()
@@ -196,6 +204,7 @@ class AppViewModel : ViewModel() {
             val auth = runCatchingNonCancellation {
                 repo.login(u, p)
                 app.creds.save(u, p)
+                refreshProfile()
             }
             val authError = auth.exceptionOrNull()
             if (authError != null) {

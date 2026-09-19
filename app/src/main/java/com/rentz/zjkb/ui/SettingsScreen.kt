@@ -84,6 +84,9 @@ fun SettingsScreen(reminderScheduler: ReminderScheduler, vm: AppViewModel, onRer
     val repoUrl = stringResource(R.string.settings_about_repo_url)
     val exportUnavailableMessage = stringResource(R.string.msg_export_no_app)
     val upstreamUrl = stringResource(R.string.settings_about_upstream_url)
+    val userProfile by vm.userProfile.collectAsState()
+    val displayName = userProfile.xm.ifBlank { "华珠同学" }
+    val displaySchool = userProfile.xxmc.ifBlank { "华南农业大学珠江学院" }
 
     Scaffold(topBar = {
         TopAppBar(title = "我的", actions = {
@@ -99,8 +102,8 @@ fun SettingsScreen(reminderScheduler: ReminderScheduler, vm: AppViewModel, onRer
                     Icon(MiuixIcons.Graduation, null, Modifier.size(28.dp), tint = colors.onPrimaryContainer)
                 }
                 Column(Modifier.weight(1f).padding(horizontal = 16.dp)) {
-                    Text("华珠同学", style = MiuixTheme.textStyles.title3)
-                    Text("华南农业大学珠江学院", style = MiuixTheme.textStyles.footnote1, color = colors.onSurfaceSecondary, modifier = Modifier.padding(top = 6.dp))
+                    Text(displayName, style = MiuixTheme.textStyles.title3)
+                    Text(displaySchool, style = MiuixTheme.textStyles.footnote1, color = colors.onSurfaceSecondary, modifier = Modifier.padding(top = 6.dp))
                     Text(if (username.isNotBlank()) "学号 $username" else "连接校园账户", style = MiuixTheme.textStyles.footnote2, color = colors.onSurfaceSecondary, modifier = Modifier.padding(top = 3.dp))
                 }
                 Icon(MiuixIcons.ChevronRight, "修改账户", Modifier.size(16.dp), tint = colors.onSurfaceSecondary)
