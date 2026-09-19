@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center_vertical" android:padding="12dp"
+    android:background="@drawable/widget_glass_bg">
+    <TextView style="@style/WidgetText" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="@string/widget_agenda_title" android:textStyle="bold" android:textColor="@color/widget_accent" />
+    <TextView style="@style/WidgetCaption" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="6dp" android:text="长按并向下拉高，展开完整日程" />
+</LinearLayout>

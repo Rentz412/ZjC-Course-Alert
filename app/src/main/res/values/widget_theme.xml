@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="widget_paper">#FCFDFB</color>
+    <color name="widget_ink">#25372F</color>
+    <color name="widget_muted">#6E7A72</color>
+    <color name="widget_line">#E2E8DF</color>
+    <color name="widget_accent">#147D60</color>
+    <color name="widget_tint">#E4F2DF</color>
+    <color name="widget_card">#F0F3EE</color>
+    <style name="WidgetText" parent="">
+        <item name="android:fontFamily">@font/dm_sans</item>
+        <item name="android:textColor">@color/widget_ink</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="WidgetCaption" parent="WidgetText">
+        <item name="android:textColor">@color/widget_muted</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+    <style name="WidgetNavigation" parent="WidgetText">
+        <item name="android:textColor">@color/widget_accent</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:background">@drawable/widget_control_bg</item>
+    </style>
+    <string name="widget_agenda_label">华珠课表 · 日程手账</string>
+    <string name="widget_agenda_description">前后切换日期，滚动浏览完整课程；支持多个独立日程和深色模式</string>
+    <string name="widget_agenda_title">日程手账</string>
+    <string name="widget_agenda_loading">正在整理课表…</string>
+    <string name="widget_agenda_hint">点标题打开课表 · ↻ 刷新状态</string>
+    <string name="widget_previous">‹ 前一天</string>
+    <string name="widget_next">后一天 ›</string>
+    <string name="widget_today_action">回到今天</string>
+    <string name="widget_open">打开华珠课表</string>
+    <string name="widget_refresh">刷新课程状态</string>
+</resources>

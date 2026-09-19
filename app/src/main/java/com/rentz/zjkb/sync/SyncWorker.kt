@@ -1,0 +1,47 @@
+package com.rentz.zjkb.sync
+
+import android.content.Context
+import com.rentz.zjkb.data.remote.xq.XqSemesterRules
+import androidx.work.Constraints
+import androidx.work.CoroutineWorker
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
+import com.rentz.zjkb.ZjkbApp
+import java.util.concurrent.TimeUnit
+
+/**
+ * 后台维护：每 12h 同步课程数据 + 重排闹钟。
+ * 低频访问教务系统（防风控）；同步失败静默保留本地缓存。
+ */
+class SyncWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+
+    override suspend fun doWork(): Result {
+        val app = applicationContext as ZjkbApp
+        // 未登录时不做任何网络访问，直接视为成功，避免无意义的失败重试
+        if (app.creds.username == null) return Result.success()
+        return try {
+            val xnxq = app.settings.selectedXnxq ?: XqSemesterRules.fallbackDm()
+            app.repo.sync(xnxq)
+            app.reminderScheduler.reschedule()
+            com.rentz.zjkb.widget.TodayWidgetProvider.refreshAll(applicationContext)
+            Result.success()
+        } catch (e: Exception) {
+            if (runAttemptCount < 3) Result.retry() else Result.failure()
+        }
+    }
+
+    companion object {
+        private const val NAME = "zjkb_periodic_sync"
+
+        fun enqueue(context: Context) {
+            val req = PeriodicWorkRequestBuilder<SyncWorker>(12, TimeUnit.HOURS)
+                .setConstraints(Constraints(requiredNetworkType = NetworkType.CONNECTED))
+                .build()
+            WorkManager.getInstance(context)
+                .enqueueUniquePeriodicWork(NAME, ExistingPeriodicWorkPolicy.KEEP, req)
+        }
+    }
+}

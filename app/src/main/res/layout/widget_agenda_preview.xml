@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
+    android:padding="20dp" android:background="@drawable/widget_glass_bg">
+    <TextView style="@style/WidgetCaption" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="ZjC  /  华珠课表" android:textColor="@color/widget_accent" />
+    <TextView style="@style/WidgetText" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="日程手账" android:textSize="24sp" android:textStyle="bold" android:layout_marginTop="6dp" />
+    <TextView style="@style/WidgetCaption" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="示例日程 · 周一 · 2 节课" android:layout_marginTop="8dp" android:layout_marginBottom="12dp" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+        android:padding="14dp" android:background="@drawable/widget_course_bg">
+        <TextView style="@style/WidgetCaption" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="08:30 — 10:00" android:textColor="@color/widget_accent" />
+        <TextView style="@style/WidgetText" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="数据结构与算法" android:textSize="16sp" android:textStyle="bold" android:layout_marginTop="6dp" />
+        <TextView style="@style/WidgetCaption" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="教学楼 305 · 1–2 节" android:layout_marginTop="6dp" />
+    </LinearLayout>
+    <TextView style="@style/WidgetText" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="14:30 — 16:00\n设计基础 · 综合楼 206" android:lineSpacingExtra="6dp" android:padding="14dp"
+        android:layout_marginTop="8dp" android:background="@drawable/widget_control_bg" />
+    <TextView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
+    <TextView style="@style/WidgetNavigation" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="‹ 前一天        今天        后一天 ›" android:layout_marginTop="10dp" />
+</LinearLayout>

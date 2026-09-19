@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 今日课程小组件（RemoteViews 经典方案，无 Glance 会话 → 无无限加载）。
+     4x2 默认布局：头行（周/星期 + 课数）+ 最多4行课程 + 更多提示。 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="14dp"
+    android:paddingEnd="14dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/widget_glass_bg">
+
+    <!-- 头行 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/widget_header_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第1周 · 周一"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="#FFF2F0FA" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=""
+            android:textSize="1sp" />
+
+        <TextView
+            android:id="@+id/widget_header_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4节课"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFB0AFC6" />
+    </LinearLayout>
+
+    <!-- 休息提示 -->
+    <TextView
+        android:id="@+id/widget_rest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/widget_rest"
+        android:textSize="12sp"
+        android:textColor="#FFB0AFC6"
+        android:visibility="gone" />
+
+    <!-- 空态：今天没课 -->
+    <TextView
+        android:id="@+id/widget_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/widget_empty"
+        android:textSize="14sp"
+        android:textColor="#FFB0AFC6"
+        android:visibility="gone" />
+
+    <!-- 课程行容器 -->
+    <LinearLayout
+        android:id="@+id/widget_courses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="4dp" />
+
+    <!-- 更多课程提示 -->
+    <TextView
+        android:id="@+id/widget_more"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="11sp"
+        android:textColor="#FFB0AFC6"
+        android:visibility="gone" />
+</LinearLayout>

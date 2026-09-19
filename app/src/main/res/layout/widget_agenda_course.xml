@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+    android:paddingBottom="8dp">
+    <LinearLayout android:id="@+id/course_row" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="12dp" android:background="@drawable/widget_course_bg">
+        <TextView android:id="@+id/course_time" style="@style/WidgetText" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:textColor="@color/widget_accent" android:textSize="12sp" />
+        <TextView android:id="@+id/course_name" style="@style/WidgetText" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textSize="15sp"
+            android:textStyle="bold" android:lineSpacingExtra="2dp" />
+        <TextView android:id="@+id/course_room" style="@style/WidgetText" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textSize="12sp" />
+        <TextView android:id="@+id/course_teachers" style="@style/WidgetCaption" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="3dp" />
+        <TextView android:id="@+id/course_status" style="@style/WidgetCaption" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textColor="@color/widget_accent" />
+    </LinearLayout>
+</LinearLayout>
