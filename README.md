@@ -1,4 +1,4 @@
-# 华珠课表 · ZjC-Course-Alert
+<div align="center"><h1>华珠课表 · ZjC-Course-Alert</h1></div>
 
 <p align="center">
   <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="108" height="108" alt="华珠课表 Logo" />
@@ -19,13 +19,7 @@
 
 ---
 
-<!-- 💡 在这里插入应用主界面展示图 -->
-<!-- 建议尺寸：横版大图或多机并排展示 -->
-<p align="center">
-  <img src="docs/screenshots/banner.png" alt="应用预览图展示" width="100%" />
-</p>
-
-> ⚠️ **声明**：本项目为第三方开源客户端，仅供个人学习与日常日程管理使用。非学校或喜鹊儿（金智教育）官方出品，不收集、不上传任何个人数据至第三方服务器。
+> ⚠️ **声明**：本项目为第三方开源客户端，仅供个人学习与日常日程管理使用。非学校或喜鹊儿（kingsoft教务系统）官方出品，不收集、不上传任何个人数据至第三方服务器。
 
 ---
 
@@ -43,7 +37,7 @@
 
 ### 📌 经典桌面手账小组件
 - **原生 RemoteViews 架构**：秒级载入，杜绝白屏与无限加载死锁。
-- **支持自由拉伸**：从单行极简条（`3×1`）到多日程大卡片（`4×2` 及以上）自适应优雅呈现。
+- **支持自由拉伸**：支持从 `4×4`（约显示1~2门课程）拉伸到 `4×7` 及以上长度，可见课程更多
 - **下节课高亮引导**：醒目指示下一节课时间、教室与名称，抬手即知去哪上课。
 
 ### 🔔 准时守信的后台提醒
@@ -53,22 +47,42 @@
 
 ---
 
+> **注**：预览图部分内容已打码，可能影响视觉观感
+
 ## 📱 界面预览
 
-<!-- 💡 请在这里放置手机实机截图，把路径换成你自己的图片 -->
 <table align="center">
   <tr>
     <td align="center" width="33%">
-      <img src="docs/screenshots/today.png" alt="今日日程页" width="100%" />
+      <img src="docs/screenshots/today.jpg" alt="今日日程页" width="100%" />
       <br /><b>今日日程 · 灵动倒计时</b>
     </td>
     <td align="center" width="33%">
-      <img src="docs/screenshots/week.png" alt="周课表视图" width="100%" />
+      <img src="docs/screenshots/week.jpg" alt="周课表视图" width="100%" />
       <br /><b>周课表 · 莫兰迪网格</b>
     </td>
     <td align="center" width="33%">
-      <img src="docs/screenshots/settings.png" alt="个人设置页" width="100%" />
+      <img src="docs/screenshots/settings.jpg" alt="个人设置页" width="100%" />
       <br /><b>个人设置 · 快捷功能矩阵</b>
+    </td>
+  </tr>
+</table>
+
+## 📱 桌面小组件与通知预览
+
+<table align="center">
+  <tr>
+    <td align="center" width="18%">
+      <img src="docs/screenshots/plugin.jpg" alt="桌面小组件" width="70%" />
+      <br /><b>桌面小组件 · 抬手即看</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/notice2.jpg" alt="原生实时通知" width="70%" />
+      <br /><b>原生实时通知 · 类灵动岛体验</b>
+    </td>
+    <td align="center" width="21%">
+      <img src="docs/screenshots/notice.jpg" alt="通知中心预览" width="70%" />
+      <br /><b>通知中心预览 · 准时提醒</b>
     </td>
   </tr>
 </table>
@@ -85,7 +99,9 @@
 2. 点击「登录并同步」，应用将通过内置安全协议自动拉取当前学期的课程与作息。
 3. 按照向导指引开启**通知**与**精确闹钟**权限，即可享受无忧上课提醒。
 
-> 💡 **提示**：教务网络仅在学校教务系统正常运行时可连通同步；课表拉取成功后会持久化储存在本地，**无网状态下亦可离线秒开查看**。
+> 💡 **提示**：教务网络仅在学校教务系统正常运行时可连通同步；课表拉取成功后会持久化储存在本地，**无网状态下亦可离线秒开查看**，无需烦恼喜鹊儿app原生的加载慢问题。
+
+> ⚠️ **提醒**：如使用app自带的`类灵动岛通知（即安卓原生的实时通知）`,请务必给予实时通知权限`（澎湃OS：长按应用-应用详情-通知管理-焦点通知/实时动态，开启）`，并允许app**后台无限制**，否则app很有可能无法使用。
 
 ---
 
