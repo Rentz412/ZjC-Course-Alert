@@ -1,51 +1,134 @@
-# 华珠课表 · ZjC
+# 华珠课表 · ZjC-Course-Alert
 
-华南农业大学珠江学院课表 App：通过喜鹊儿（金智教务移动端）协议自动拉取课表、
-还原真实作息时间、周课表视图与上课提醒。
+<p align="center">
+  <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" width="108" height="108" alt="华珠课表 Logo" />
+</p>
 
-> 非官方客户端，仅账户持有人个人使用。与学校及金智教育无任何关联。
+<p align="center">
+  <b>专为华南农业大学珠江学院学子打造的现代化校园课表应用</b><br>
+  极简美学 · 离线手账质感 · 准时课前提醒 · 优雅桌面小组件
+</p>
 
-## 功能
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Android-green.svg" alt="Platform" />
+  <img src="https://img.shields.io/badge/Language-Kotlin-purple.svg" alt="Language" />
+  <img src="https://img.shields.io/badge/UI-Jetpack%20Compose-blue.svg" alt="UI" />
+  <img src="https://img.shields.io/badge/School-华南农业大学珠江学院-emerald.svg" alt="School" />
+  <img src="https://img.shields.io/badge/License-Apache--2.0-orange.svg" alt="License" />
+</p>
 
-- **学号密码一键登录**（喜鹊儿协议，学校内置为华南农业大学珠江学院，无需配置任何地址）
-- **课表同步**：当前周真实课表（课程/教师/教室/周次），Room 离线缓存，自动重登重试
-- **今日页**：上课中/课间倒计时卡片 + 今日课次列表
-- **周课表**：大节网格对齐、今日高亮、周切换
-- **上课提醒**：精确闹钟，提前分钟数可调，开机自启重排
-- **今日休息**：一键静音当天全部提醒，仅当日生效，跨零点自动失效
-- **桌面小组件**（Glance）：今日课程 + 下节课高亮
-- **导出到日历**：当前学期课表导出为 `.ics`
-- **应用内更新**：GitHub Release 检查更新，SHA-256 校验后转交系统安装器
-- **首次使用向导**：登录 → 权限 → 提醒 三步
-- **后台同步**：WorkManager 每 12h 一次（低频防风控）
+---
 
-## 构建
+<!-- 💡 在这里插入应用主界面展示图 -->
+<!-- 建议尺寸：横版大图或多机并排展示 -->
+<p align="center">
+  <img src="docs/screenshots/banner.png" alt="应用预览图展示" width="100%" />
+</p>
+
+> ⚠️ **声明**：本项目为第三方开源客户端，仅供个人学习与日常日程管理使用。非学校或喜鹊儿（金智教育）官方出品，不收集、不上传任何个人数据至第三方服务器。
+
+---
+
+## ✨ 核心特性
+
+### 🌿 极简雅致，拒绝臃肿
+- **现代美学排版**：告别杂乱的校园广告与信息流，回归纯粹日程。
+- **莫兰迪低饱和配色**：精心调校的温润护眼色系，同课程同教师全局自动锁定同一色彩。
+- **自适应深浅色模式**：白昼如纸张温润，暗夜如静谧墨水，全天候舒适阅读。
+
+### ⏰ 华珠真实作息与周次严格对齐
+- **专属时间槽位**：内置华珠真实作息网格（上午 8:30 起步、大课连上规则、晚间作息等），卡片严格占满节次格，告别时间轴压扁或空白错位。
+- **复杂周次精准解析**：完整支持单双周、区间周与跳周（如 `1-5,7-17周`），绝不漏课、不错周。
+- **周末动态展开**：周一至周五精致平铺；仅当周末有课时自动展开对应星期列，最大化工作日可视空间。
+
+### 📌 经典桌面手账小组件
+- **原生 RemoteViews 架构**：秒级载入，杜绝白屏与无限加载死锁。
+- **支持自由拉伸**：从单行极简条（`3×1`）到多日程大卡片（`4×2` 及以上）自适应优雅呈现。
+- **下节课高亮引导**：醒目指示下一节课时间、教室与名称，抬手即知去哪上课。
+
+### 🔔 准时守信的后台提醒
+- **底层精准闹钟（Exact Alarm）**：提前 5~30 分钟自由配置，准点唤醒通知。
+- **一键「今日休息」**：突发调休、请假或放假时，轻点卡片即刻静音当天所有提醒，跨过零点自动恢复。
+- **支持日历导出（ICS）**：一键将全学期课表导出为标准日历文件，无缝导入系统日历或分享给好友。
+
+---
+
+## 📱 界面预览
+
+<!-- 💡 请在这里放置手机实机截图，把路径换成你自己的图片 -->
+<table align="center">
+  <tr>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/today.png" alt="今日日程页" width="100%" />
+      <br /><b>今日日程 · 灵动倒计时</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/week.png" alt="周课表视图" width="100%" />
+      <br /><b>周课表 · 莫兰迪网格</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/settings.png" alt="个人设置页" width="100%" />
+      <br /><b>个人设置 · 快捷功能矩阵</b>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🚀 快速上手
+
+### 1. 下载安装
+前往本仓库的 [Releases 页面](../../releases) 下载最新版的 `华珠课表-release.apk` 即可直接安装。
+
+### 2. 首次登录
+1. 打开应用，输入你的**教务学号**与**密码**（即喜鹊儿 App 登录凭据）。
+2. 点击「登录并同步」，应用将通过内置安全协议自动拉取当前学期的课程与作息。
+3. 按照向导指引开启**通知**与**精确闹钟**权限，即可享受无忧上课提醒。
+
+> 💡 **提示**：教务网络仅在学校教务系统正常运行时可连通同步；课表拉取成功后会持久化储存在本地，**无网状态下亦可离线秒开查看**。
+
+---
+
+## 🔒 隐私与安全性
+
+- **密码与凭据**：仅保存在手机本机的 `EncryptedSharedPreferences`（基于 Android Keystore 硬件级加密），绝不上报任何私有服务器。
+- **纯粹开源**：代码 100% 透明开源，无热更新下发、无内嵌第三方统计或商业广告 SDK。
+- **权限最小化**：仅申请网络请求（拉取课表）、通知（上课提醒）、精确闹钟（准时调度）等必需权限。
+
+---
+
+## 🛠️ 本地开发与构建
+
+本项目使用标准的 Android Gradle 构建体系：
 
 ```bash
-./gradlew assembleDebug          # 调试包
-./gradlew testDebugUnitTest      # 单元测试（签名固定向量 + 学期语义 + 真实探针）
+# 克隆仓库
+git clone https://github.com/Rentz412/ZjC-Course-Alert.git
+cd ZjC-Course-Alert
+
+# 运行全量单元测试（协议签名固定向量、周次区间算法等）
+./gradlew testDebugUnitTest
+
+# 编译 Debug 测试包
+./gradlew assembleDebug
+
+# 编译 Release 生产优化包（启用 R8 混淆压缩与内联优化）
+./gradlew assembleRelease
 ```
 
-> `XqE2eProbeTest` 是真实端到端探针：需要本地凭据文件
-> `%LOCALAPPDATA%/hermes/secrets/xiqueer-runtime.env`，文件不存在时自动跳过。
+- **Android SDK**：Min SDK 26 (Android 8.0) · Target SDK 37
+- **核心组件**：Kotlin 2.4 · Jetpack Compose · Room Database · WorkManager · OkHttp 5
 
-Release 签名与 CI 发布流程同 [GBU-Course-Alert](https://github.com/HuanLinOTO/GBU-Course-Alert)。
+---
 
-## 数据源说明
+## 🤝 鸣谢与致敬
 
-- 协议：喜鹊儿移动端（九键签名信封：param/param2/timestamp/echo/encrptSecretKey/xqerSign）
-- 管理端：`https://api.xiqueer.com/manager`（学校发现、登录）
-- 教务子系统：登录后由服务端下发（课表 `mycourseschedule.action`）
-- 周次语义：服务端 `zc` 为准；`qssj/jssj` 是**响应所在周**的起止日期，
-  第 1 周周一 = `qssj - (zc-1)` 周
-- 作息网格：`sjhjinfo` 为空时（本校实测如此）按 `jcsw/jcxw/jczw` 分节数推导
+- 感谢上游开源项目 [HuanLinOTO/GBU-Course-Alert](https://github.com/HuanLinOTO/GBU-Course-Alert) 提供的优秀课表应用架构灵感与基础骨架。
+- 感谢开源字体社区与各类开源矢量图标提供的美学支持。
 
-## 隐私
+---
 
-- 凭据仅存本机（EncryptedSharedPreferences / Android Keystore 加密）
-- 不写日志、不上传任何数据到第三方服务器
-- 课表明文 HTTP 通道与官方 App 拓扑一致（`http:801`），设置里可收紧
+## 📄 开源许可证
 
-## 技术栈
-
-Kotlin 2.4 · Jetpack Compose (BOM 2026.08) · Material 3 · OkHttp · Room · WorkManager + AlarmManager · Glance Widget · AGP 9.4
+本项目基于 [Apache License 2.0](LICENSE) 开源。
+Copyright © 2026 Rentz. All rights reserved.
