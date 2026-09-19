@@ -98,12 +98,13 @@ class AppUpdater(private val context: Context) {
             if (tag.isBlank() || tag == "latest") {
                 throw IOException("无法获取最新发布标签（触发 GitHub API 限流且网页未重定向）")
             }
-            val apkName = "ZjC-Course-Alert-${tag}-release.apk"
+            val cleanVer = tag.removePrefix("v")
+            val apkName = "ZjC-Course-Alert-${cleanVer}-release.apk"
             val downloadUrl = "https://github.com/$REPO/releases/download/$tag/$apkName"
             GitHubRelease(
                 tagName = tag,
                 name = "华珠课表 $tag",
-                body = "已检测到新版本 $tag（因 GitHub API 访问频次限制，已通过免限流通道获取）。",
+                body = "已检测到新版本 $tag。可直接在应用内更新，或通过浏览器打开 Release 页面下载。",
                 htmlUrl = finalUrl,
                 assets = listOf(
                     GitHubAsset(
@@ -200,17 +201,19 @@ class AppUpdater(private val context: Context) {
      * 设置页引导授权后可点「安装」重试（文件仍在）。
      */
     fun install(apk: File): InstallResult {
-        if (!context.packageManager.canRequestPackageInstalls()) return InstallResult.NeedPermission
-        val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", apk)
-        val intent = Intent(Intent.ACTION_VIEW).apply {
-            setDataAndType(uri, "application/vnd.android.package-archive")
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        return try {
+        try {
+            if (!context.packageManager.canRequestPackageInstalls()) return InstallResult.NeedPermission
+            val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", apk)
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(uri, "application/vnd.android.package-archive")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
             context.startActivity(intent)
-            InstallResult.Launched
+            return InstallResult.Launched
         } catch (e: ActivityNotFoundException) {
-            InstallResult.NoInstaller
+            return InstallResult.NoInstaller
+        } catch (e: Throwable) {
+            return InstallResult.NoInstaller
         }
     }
 

@@ -460,7 +460,7 @@ private fun ReleaseNotesDialog(
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
                     Button(
                         onClick = onDismiss,
@@ -472,9 +472,24 @@ private fun ReleaseNotesDialog(
                     ) {
                         Text(stringResource(R.string.common_cancel))
                     }
+                    val uriHandler = LocalUriHandler.current
+                    Button(
+                        onClick = {
+                            val cleanTag = tagName.trim()
+                            uriHandler.openUri("https://github.com/Rentz412/ZjC-Course-Alert/releases/tag/$cleanTag")
+                            onDismiss()
+                        },
+                        modifier = Modifier.weight(1.1f),
+                        colors = ButtonDefaults.buttonColors(
+                            color = MiuixTheme.colorScheme.secondaryVariant,
+                            contentColor = MiuixTheme.colorScheme.onSecondaryVariant,
+                        ),
+                    ) {
+                        Text("浏览器打开")
+                    }
                     Button(
                         onClick = onDownload,
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1.1f),
                         colors = ButtonDefaults.buttonColors(
                             color = MiuixTheme.colorScheme.primary,
                             contentColor = MiuixTheme.colorScheme.onPrimary,
